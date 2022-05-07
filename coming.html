@@ -1,0 +1,203 @@
+<html lang="en">
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" 
+        rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+        <script src="https://cdn.jsdelivr.net/npm/near-api-js@0.41.0/dist/near-api-js.min.js"></script>
+        
+        <title>Roketo Dashboard</title>
+
+        <style>
+            .loader {
+              border: 16px solid #f3f3f3;
+              border-radius: 50%;
+              border-top: 16px solid #3498db;
+              width: 20px;
+              height: 20px;
+              -webkit-animation: spin 2s linear infinite; /* Safari */
+              animation: spin 2s linear infinite;
+            }
+            
+            /* Safari */
+            @-webkit-keyframes spin {
+              0% { -webkit-transform: rotate(0deg); }
+              100% { -webkit-transform: rotate(360deg); }
+            }
+            
+            @keyframes spin {
+              0% { transform: rotate(0deg); }
+              100% { transform: rotate(360deg); }
+            }
+            </style>
+            
+    </head>
+
+<body>
+
+
+  
+
+
+<div class="container-fluid ">
+  
+  <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" style="background-color: #e3f2fd;">
+    <div class="container">
+      <a href="index.html" class="navbar-brand">Roketo Dashboard</a>
+      <button aria-controls="responsive-navbar-nav" type="button" aria-label="Toggle navigation" class="navbar-toggler collapsed"><span class="navbar-toggler-icon"></span></button>
+      <div class="navbar-collapse collapse" id="responsive-navbar-nav">
+        <div class="me-auto navbar-nav">
+  
+          <ul class="navbar-nav ">
+            <li class="nav-item active">
+              <a class="nav-link" href="index.html"><span class="sr-only">List going Stream</span></a>
+            </li>
+
+            <li class="nav-item active">
+              <a class="nav-link" href="coming.html"><span class="sr-only">List coming Stream</span></a>
+            </li>
+    
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-toggle="modal" data-target="#DepositModal">Add Deposit</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"  data-toggle="modal" data-target="#TransferDepositModal">Create Stream</a>
+            </li>
+            
+          </ul>
+  
+  
+        </div>
+        <div class="navbar-nav">
+          
+  
+          <span class="navbar-text" id="balance"> </span>
+          <p><button class="btn btn-primary" id="baglan">Sign in</button></p>
+        </div>
+      </div>
+    </div>
+  </nav>
+  
+  
+  
+  
+
+
+  
+    <div class="row">
+      <div class="col">
+        
+
+        
+      </div>
+    </div>
+
+
+    <div class="row" >
+      <table class="table" id="stream_list_div">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">id</th>
+          <th scope="col">creater</th>
+          <th scope="col">balance</th>
+          <th scope="col">status</th>
+          <th scope="col">tokens_per_sec</th>
+          <th scope="col">tokens_total_withdrawn</th>
+
+          <th scope="col">action</th>
+        </tr>
+      </thead>
+      <tbody>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+  
+   
+
+
+
+
+<!-- Modal deposit -->
+<div id="DepositModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Add Deposit</h4>
+      </div>
+      <div class="modal-body">
+        <label for="exampleInputEmail1">Deposit Amount</label>
+        <input type="text" class="form-control" id="deposit_amount"  placeholder="Deposit Amount" value="1">
+        <button type="button" class="btn btn-primary" id="deposit">Deposit</button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- Modal transfer deposit -->
+<div id="TransferDepositModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Transfer Deposit</h4>
+      </div>
+      <div class="modal-body">
+        <label for="exampleInputEmail1">Transfer Amount</label>
+        <input type="text" class="form-control" id="transfer_amount"  placeholder="Deposit Amount" value="1">
+
+
+        <label for="exampleInputEmail1">Receiver Account</label>
+        <input type="text" class="form-control" id="receiver_account"  placeholder="Receiver Account ex:mansurbestas.testnet" value="" >
+
+        <label for="exampleInputEmail1">Memo</label>
+        <input type="text" class="form-control" id="memo"  placeholder="memo" value="test" >
+
+        <label for="exampleInputEmail1">Token Per Second</label>
+        <input type="text" class="form-control" id="tokens_per_sec"  placeholder="memo" value="1" >
+
+        <button type="button" class="btn btn-primary" id="transfer">Transfer</button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script src="coming.js"></script>
+</body>
+
+
+
+</html>

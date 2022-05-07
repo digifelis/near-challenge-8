@@ -197,13 +197,6 @@ baglan_button.addEventListener('click', async function () {
     } else {
         wallet.signOut();
         baglan_button.textContent = "sign in";
+        location.reload();
     }
 });
-
-
-/*
-pay1_button.addEventListener('click', async function(){
-
-
-})
-*/

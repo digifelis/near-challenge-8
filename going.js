@@ -192,7 +192,7 @@ baglan_button.addEventListener('click', async function () {
     console.log(wallet);
     if (!wallet.isSignedIn()) {
         wallet.requestSignIn(
-            "dev-1651111427025-71600221442385" // contract address
+            "wrap.testnet" // contract address
         );
     } else {
         wallet.signOut();

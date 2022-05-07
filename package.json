@@ -1,0 +1,23 @@
+{
+  "name": "near-challenge-8",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/digifelis/near-challenge-8.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/digifelis/near-challenge-8/issues"
+  },
+  //"homepage": "https://github.com/digifelis/near-challenge-8#readme",
+  "homepage": "https://${GithubUsername}.github.io/${RepositoryName}",
+  "dependencies": {
+    "gh-pages": "^3.2.3"
+  }
+}

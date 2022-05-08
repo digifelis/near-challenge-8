@@ -29,7 +29,7 @@ async function load() {
     
     if (wallet.isSignedIn()) {
         baglan_button.textContent = 'sign out   ' + wallet.getAccountId();
-        connected_account = wallet.getAccountId();
+        connected_account = await wallet.getAccountId();
     }
 
 }

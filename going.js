@@ -5,6 +5,7 @@ var transfer_button = document.getElementById("transfer");
 var contract;
 var wallet;
 var near;
+var connected_account;
 async function load() {
     /* connect near */
     var near = await new nearApi.Near({
@@ -28,16 +29,20 @@ async function load() {
     
     if (wallet.isSignedIn()) {
         baglan_button.textContent = 'sign out   ' + wallet.getAccountId();
+        connected_account = wallet.getAccountId();
     }
 
 }
 
 
 load().then(async () => {
-    await list_stream().then( async () =>{
-        await get_balance();
-        await getStreamId();
-    })
+    if(connected_account != undefined){
+        await list_stream().then( async () =>{
+            await get_balance();
+            await getStreamId();
+        })
+    }
+
 
 });
 
@@ -106,6 +111,24 @@ async function list_stream(){
         "limit": 100
     })
     const stream_list = document.getElementById("stream_list_div");
+    var table_head = `
+    <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">id</th>
+        <th scope="col">owner</th>
+        <th scope="col">receiver</th>
+        <th scope="col">balance</th>
+        <th scope="col">status</th>
+        <th scope="col">action</th>
+      </tr>
+    </thead>
+    <tbody>
+    `
+    var table_footer = `
+    </tbody></table>
+    `
     var html = "";
     var button = "";
     for(i in data){
@@ -115,7 +138,7 @@ async function list_stream(){
             button = `<button class="btn btn-success btn-lg" id="button_stream-${data[i].id}" stream_id="${data[i].id}" stream_code="passive">Start Stream</button>
                       <button class="btn btn-danger btn-lg"  id="button_stream-${data[i].id}" stream_id="${data[i].id}" stream_code="stop">Stop Stream</button>` 
         }
-        html = 
+        html += 
         `
         <tr>
             <th scope="row">${i}</th>
@@ -130,10 +153,10 @@ async function list_stream(){
             </td>
         </tr>
         `
-        stream_list.insertAdjacentHTML("beforeend", html);
+        
     }
 
-    
+    stream_list.insertAdjacentHTML("beforeend", table_head + html + table_footer);
 
 }
 

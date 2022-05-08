@@ -5,6 +5,7 @@ var deposit_button = document.getElementById("deposit");
 var contract;
 var wallet;
 var near;
+var connected_account;
 async function load() {
     /* connect near */
     var near = await new nearApi.Near({
@@ -28,16 +29,19 @@ async function load() {
     
     if (wallet.isSignedIn()) {
         baglan_button.textContent = 'sign out   ' + wallet.getAccountId();
+        connected_account = wallet.getAccountId();
     }
 
 }
 
 
 load().then(async () => {
-    await list_stream().then( async () =>{
-        await get_balance();
-        await getStreamId();
-    })
+    if(connected_account != undefined){
+        await list_stream().then( async () =>{
+            await get_balance();
+            await getStreamId();
+        })
+    }
 
 });
 
@@ -78,12 +82,30 @@ async function list_stream(){
         "limit": 100
     })
     const stream_list = document.getElementById("stream_list_div");
+    var table_head = `      <table class="table" >
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">id</th>
+        <th scope="col">creater</th>
+        <th scope="col">balance</th>
+        <th scope="col">status</th>
+        <th scope="col">tokens_per_sec</th>
+        <th scope="col">tokens_total_withdrawn</th>
+
+        <th scope="col">action</th>
+      </tr>
+    </thead>
+    <tbody>`
+    var table_footer = `
+    </tbody></table>
+    `
     var html = "";
 
     console.log(data);
 
     for(i in data){
-    html = 
+    html += 
         `
         <tr>
             <th scope="row">${i}</th>
@@ -102,10 +124,10 @@ async function list_stream(){
             </td>
         </tr>
         `
-        stream_list.insertAdjacentHTML("beforeend", html);
+        
     }
 
-    
+    stream_list.insertAdjacentHTML("beforeend", table_head + html + table_footer);
 
 }
 
